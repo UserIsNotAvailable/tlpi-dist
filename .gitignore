@@ -1,2 +1,33 @@
-/.idea/*
-/cmake-build-debug-centos-9/*
+# CMake build directories
+build/
+cmake-build-*/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Compiled object files
+*.o
+*.obj
+
+# Compiled executables (no extension on Linux/Unix)
+*~
+
+# Library files
+*.a
+*.so
+*.dylib
+*.lib
+
+# Generated files
+lib/ename.c.inc
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
