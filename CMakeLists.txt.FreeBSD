@@ -6,20 +6,15 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 macro(set_exe_list)
-        set(EXE ${GEN_EXE} ${LINUX_EXE})
+    set(EXE ${GEN_EXE})
 endmacro()
 
 add_compile_options(
-        -D_XOPEN_SOURCE=600
-        -D_DEFAULT_SOURCE
         -g
-        -pedantic
-        -Wall
-        -W
-        -Wmissing-prototypes
-        -Wno-sign-compare
-        -Wno-unused-parameter
 )
+
+find_library(LIBRT rt)
+find_library(LIBCRYPT crypt)
 
 if (CMAKE_C_COMPILER_ID MATCHES "GNU")
     add_compile_options(-Wimplicit-fallthrough)
@@ -32,12 +27,6 @@ if (CMAKE_C_COMPILER_ID MATCHES "Clang")
             -Wno-format-pedantic
     )
 endif ()
-
-find_library(LIBRT rt)
-find_library(LINUX_LIBDL dl)
-find_library(LINUX_LIBACL acl)
-find_library(LIBCRYPT crypt)
-find_library(LINUX_LIBCAP cap)
 
 set(CMAKE_THREAD_PREFER_PTHREAD TRUE)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)

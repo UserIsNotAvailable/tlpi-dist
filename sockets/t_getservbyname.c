@@ -17,6 +17,7 @@
    now obsolete; new programs should use getaddrinfo().
 */
 #include <netdb.h>
+#include <netinet/in.h>
 #include "tlpi_hdr.h"
 
 int

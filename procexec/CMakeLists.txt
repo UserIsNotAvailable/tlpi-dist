@@ -1,6 +1,5 @@
 set(GEN_EXE
         acct_on
-        acct_view
         child_status
         closeonexec
         envargs
@@ -14,7 +13,6 @@ set(GEN_EXE
         multi_SIGCHLD
         multi_wait
         orphan
-        pdeath_signal
         t_execl
         t_execle
         t_execve
@@ -28,14 +26,18 @@ set(GEN_EXE
 set(LINUX_EXE
         demo_clone
         t_clone
+        acct_view
         acct_v3_view
+        pdeath_signal
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     add_executable(${exe} ${exe}.c)
     target_link_libraries(${exe} PRIVATE tlpi)
 endforeach ()
 
-target_link_libraries(pdeath_signal PRIVATE Threads::Threads)
+if (TARGET pdeath_signal)
+    target_link_libraries(pdeath_signal PRIVATE Threads::Threads)
+endif ()

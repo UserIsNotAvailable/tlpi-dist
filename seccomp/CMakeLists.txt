@@ -17,7 +17,7 @@ set(LINUX_EXE
         seccomp_multiarch
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     if (exe STREQUAL "seccomp_unotify_mkdir" OR exe STREQUAL "seccomp_unotify_openat")
@@ -27,9 +27,13 @@ foreach (exe ${EXE})
     endif ()
 
     target_link_libraries(${exe} PRIVATE tlpi)
-
 endforeach ()
 
 find_library(LINUX_LIBSECCOMP seccomp)
-target_link_libraries(libseccomp_demo PRIVATE ${LINUX_LIBSECCOMP})
-target_link_libraries(seccomp_multiarch PRIVATE ${LINUX_LIBRT})
+
+if (TARGET libseccomp_demo)
+    target_link_libraries(libseccomp_demo PRIVATE ${LINUX_LIBSECCOMP})
+endif ()
+if (TARGET libseccomp_demo)
+    target_link_libraries(seccomp_multiarch PRIVATE ${LIBRT})
+endif ()

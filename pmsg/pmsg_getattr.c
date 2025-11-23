@@ -16,6 +16,7 @@
 
    Linux supports POSIX message queues since kernel 2.6.6.
 */
+#include <fcntl.h>
 #include <mqueue.h>
 #include "tlpi_hdr.h"
 

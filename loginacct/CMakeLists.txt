@@ -8,7 +8,7 @@ set(LINUX_EXE
         view_lastlog
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     add_executable(${exe} ${exe}.c)

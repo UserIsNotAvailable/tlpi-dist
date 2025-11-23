@@ -7,11 +7,14 @@ set(LINUX_EXE
         syscall_gettimeofday
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
-add_executable(vdso_gettimeofday gettimeofday.c)
-target_link_libraries(vdso_gettimeofday PRIVATE tlpi)
-
-add_executable(syscall_gettimeofday gettimeofday.c)
-target_compile_definitions(syscall_gettimeofday PRIVATE USE_SYSCALL)
-target_link_libraries(syscall_gettimeofday PRIVATE tlpi)
+foreach (exe ${EXE})
+    if (${exe} STREQUAL "vdso_gettimeofday")
+        add_executable(vdso_gettimeofday gettimeofday.c)
+    elseif (${exe} STREQUAL "syscall_gettimeofday")
+        add_executable(syscall_gettimeofday gettimeofday.c)
+        target_compile_definitions(syscall_gettimeofday PRIVATE USE_SYSCALL)
+    endif ()
+    target_link_libraries(${exe} PRIVATE tlpi)
+endforeach ()

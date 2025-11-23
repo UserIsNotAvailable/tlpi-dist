@@ -21,7 +21,7 @@ set(LINUX_EXE
         signalfd_sigval
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     if (exe STREQUAL "sigmask_siglongjmp")
@@ -37,5 +37,5 @@ foreach (exe ouch intquit sig_receiver)
     target_compile_definitions(${exe} PRIVATE _BSD_SOURCE)
 endforeach ()
 
-target_link_libraries(nonreentrant PRIVATE ${LINUX_LIBCRYPT})
+target_link_libraries(nonreentrant PRIVATE ${LIBCRYPT})
 target_compile_definitions(sigmask_siglongjmp PRIVATE USE_SIGSETJMP)

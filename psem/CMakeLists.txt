@@ -13,7 +13,7 @@ set(LINUX_EXE
         # None
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     add_executable(${exe} ${exe}.c)
@@ -21,5 +21,6 @@ foreach (exe ${EXE})
     target_link_libraries(${exe} PRIVATE Threads::Threads)
 endforeach ()
 
-target_link_libraries(psem_timedwait PRIVATE ${LINUX_LIBRT})
-
+if (TARGET psem_timedwait)
+    target_link_libraries(psem_timedwait PRIVATE ${LIBRT})
+endif ()

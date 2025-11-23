@@ -9,10 +9,10 @@ set(LINUX_EXE
         # None
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     add_executable(${exe} ${exe}.c)
     target_link_libraries(${exe} PRIVATE tlpi)
-    target_link_libraries(${exe} PRIVATE ${LINUX_LIBRT})
+    target_link_libraries(${exe} PRIVATE ${LIBRT})
 endforeach ()

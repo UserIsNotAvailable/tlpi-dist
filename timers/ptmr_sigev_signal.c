@@ -26,7 +26,9 @@
    systems, an incomplete user-space implementation of POSIX timers
    was provided in glibc.
 */
+#if !defined(__FreeBSD__)
 #define _POSIX_C_SOURCE 199309
+#endif
 #include <signal.h>
 #include <time.h>
 #include "curr_time.h"                  /* Declares currTime() */

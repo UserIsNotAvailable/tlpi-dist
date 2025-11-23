@@ -20,12 +20,12 @@ if (BUILD_VIEW_CAP_XATTR)
     list(APPEND LINUX_EXE view_cap_xattr)
 endif ()
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     add_executable(${exe} ${exe}.c)
     target_link_libraries(${exe} PRIVATE tlpi)
     target_link_libraries(${exe} PRIVATE ${LINUX_LIBCAP})
-    target_link_libraries(${exe} PRIVATE ${LINUX_LIBCRYPT})
+    target_link_libraries(${exe} PRIVATE ${LIBCRYPT})
 endforeach ()
 

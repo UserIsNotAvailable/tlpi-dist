@@ -19,7 +19,11 @@
 
    The '-l' option indicates that lstat() rather than stat() should be used.
 */
+#if defined(__linux__)
 #include <sys/sysmacros.h>
+#else
+#include <sys/stat.h>
+#endif
 #if defined(_AIX)
 #define _BSD
 #endif

@@ -9,7 +9,7 @@ set(LINUX_EXE
         rand_dtree
 )
 
-set(EXE ${GEN_EXE} ${LINUX_EXE})
+set_exe_list()
 
 foreach (exe ${EXE})
     add_executable(${exe} ${exe}.c)
