@@ -152,10 +152,6 @@ main(int argc, char *argv[])
     if (clone(childFunc, stackTop, flags | CHILD_SIG, &cp) == -1)
         errExit("clone");
 
-    /* Now that child has been created, we can deallocate the stack */
-
-    munmap(stack, STACK_SIZE);
-
     /* Parent falls through to here. Wait for child; __WCLONE option is
        required for child notifying with signal other than SIGCHLD. */
 
@@ -163,6 +159,10 @@ main(int argc, char *argv[])
     pid_t pid = waitpid(-1, &status, (CHILD_SIG != SIGCHLD) ? __WCLONE : 0);
     if (pid == -1)
         errExit("waitpid");
+
+    /* Now that child has terminated, we can deallocate the stack */
+
+    munmap(stack, STACK_SIZE);
 
     printf("    Child PID=%ld\n", (long) pid);
     printWaitStatus("    Status: ", status);
